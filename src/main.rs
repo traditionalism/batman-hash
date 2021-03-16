@@ -1,22 +1,29 @@
 use ggez::*;
+use ggez::{ContextBuilder, Context, GameResult};
+use ggez::event::{EventHandler};
 
-struct State {}
+struct Game {}
 
-pub fn main() {
-    let state = &mut State {};
-    let c = conf::Conf::new();
-    let (ref mut ctx, ref mut event_loop) = ContextBuilder::new("kiwigrape-matchmaking", "Lucas")
-    .conf(c)
-    .build()
-    .unwrap();
-    event::run(ctx, event_loop, state).unwrap();
+const TARGET_FPS: u32 = 60;
+
+impl Game {
+
 }
 
-impl ggez::event::EventHandler for State {
+impl ggez::event::EventHandler for Game {
     fn update(&mut self, ctx: &mut Context) -> GameResult {
         Ok(())
     }
     fn draw(&mut self, ctx: &mut Context) -> GameResult {
         Ok(())
     }
+  }
+
+pub fn main() {
+    let (mut context, mut event_loop) = ContextBuilder::new
+    ("kiwigrape-matchmaking", "Lucas")
+    .build()
+    .expect("Problem fetching GGEZlib context!");
+
+    let game = &mut Game {};
 }
