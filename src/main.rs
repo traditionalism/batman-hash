@@ -1,10 +1,8 @@
 use ggez::*;
-use ggez::{ContextBuilder, Context, GameResult};
+use ggez::{ContextBuilder, Context, GameResult, graphics, event, nalgebra};
 use ggez::event::{EventHandler};
 
 struct Game {}
-
-const TARGET_FPS: u32 = 60;
 
 impl Game {
     pub fn new(_context: &mut Context) -> Game {
