@@ -7,7 +7,9 @@ struct Game {}
 const TARGET_FPS: u32 = 60;
 
 impl Game {
-
+    pub fn new(_context: &mut Context) -> Game {
+        Game {}
+    }
 }
 
 impl ggez::event::EventHandler for Game {
@@ -17,7 +19,8 @@ impl ggez::event::EventHandler for Game {
     fn draw(&mut self, ctx: &mut Context) -> GameResult {
         Ok(())
     }
-  }
+}
+
 
 pub fn main() {
     let (mut context, mut event_loop) = ContextBuilder::new
@@ -25,5 +28,10 @@ pub fn main() {
     .build()
     .expect("Problem fetching GGEZlib context!");
 
-    let game = &mut Game {};
+    let mut game = Game::new(&mut context);
+
+    match event::run(&mut context, &mut event_loop, &mut game) {
+        Ok(_) => println!("Exited properly :)"),
+        Err(e) => println!("The game had some problems: {}", e)
+    }
 }
