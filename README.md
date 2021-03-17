@@ -1,4 +1,4 @@
-# kiwigrape-matchmaking
+# batman-hash
 Nothing much, a quick test game while I'm still getting into rs :/
 
 ### Screenshots
