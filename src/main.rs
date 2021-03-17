@@ -1,5 +1,5 @@
 use ggez::*;
-use ggez::{ContextBuilder, Context, GameResult, graphics, event, nalgebra};
+use ggez::{ContextBuilder, Context, GameResult, event};
 use ggez::event::{EventHandler};
 
 struct Game {}
@@ -11,23 +11,24 @@ impl Game {
 }
 
 impl ggez::event::EventHandler for Game {
-    fn update(&mut self, ctx: &mut Context) -> GameResult {
+    fn update(&mut self, _context: &mut Context) -> GameResult<()> {
         Ok(())
     }
-    fn draw(&mut self, ctx: &mut Context) -> GameResult {
+    fn draw(&mut self, context: &mut Context) -> GameResult {
         Ok(())
     }
 }
 
 
 pub fn main() {
-    let (mut context, mut event_loop) = ContextBuilder::new
-    ("kiwigrape-matchmaking", "Lucas")
-    .build()
-    .expect("Problem fetching GGEZlib context!");
-
-    let mut game = Game::new(&mut context);
-
+    let c = conf::Conf::new();
+    let (mut context, mut event_loop) = ContextBuilder::new("kiwigrape-matchmaking", "Lucas")
+        .conf(c)
+        .build()
+        .unwrap();
+    
+    let mut game = Game::new(&mut context);    
+    
     match event::run(&mut context, &mut event_loop, &mut game) {
         Ok(_) => println!("Exited properly :)"),
         Err(e) => println!("The game had some problems: {}", e)
