@@ -1,9 +1,9 @@
 use ggez::conf::WindowMode;
-use ggez::{Context, GameResult};
-use ggez::{event, ContextBuilder};
+use ggez::{ContextBuilder, GameResult, Context};
+use ggez::{event};
 
-const WIDTH: f32 = 1920.0;
-const HEIGHT: f32 = 1080.0;
+const WIDTH: f32 = 1000.0;
+const HEIGHT: f32 = 1000.0;
 
 struct Game {}
 
@@ -14,7 +14,7 @@ impl Game {
 }
 
 impl ggez::event::EventHandler for Game {
-    fn update(&mut self, _ctx: &mut Context) -> GameResult<()> {
+    fn update(&mut self, _ctx: &mut Context) -> GameResult {
         Ok(())
     }
     fn draw(&mut self, _ctx: &mut Context) -> GameResult {
@@ -23,19 +23,22 @@ impl ggez::event::EventHandler for Game {
 }
 
 
-pub fn main() {
+pub fn main() -> GameResult {
+
     let mut window_mode: WindowMode = Default::default();
         window_mode.width = WIDTH;
         window_mode.height = HEIGHT;
-    let (mut ctx, mut event_loop) = ContextBuilder::new("kiwigrape-matchmaking", "Lucas")
+    let (context, event_loop) = &mut ContextBuilder::new("kiwigrape-matchmaking", "Lucas")
         .window_mode(window_mode)
-        .build()
-        .unwrap();
+        .build()?;
+    
+    let game = &mut Game::new(context);
 
-    let mut game = Game::new(&mut ctx);
-
-    match event::run(&mut ctx, &mut event_loop, &mut game) {
+    match event::run(context, event_loop, game) {
         Ok(_) => println!("Exited properly :)"),
         Err(e) => println!("The game had some problems: {}", e)
     }
+
+    Ok(())
 }
+
