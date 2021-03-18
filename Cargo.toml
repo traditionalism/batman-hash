@@ -1,5 +1,5 @@
 [package]
-name = "supreme-engine"
+name = "batman-hash"
 version = "0.1.0"
 authors = ["Lucas <genevasterm@protonmail.ch>"]
 edition = "2018"

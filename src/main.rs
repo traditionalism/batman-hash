@@ -1,9 +1,6 @@
 use ggez::conf::WindowMode;
 use ggez::{ContextBuilder, GameResult, Context};
-use ggez::{event};
-
-const WIDTH: f32 = 1000.0;
-const HEIGHT: f32 = 1000.0;
+use ggez::event;
 
 struct Game {}
 
@@ -13,7 +10,7 @@ impl Game {
     }
 }
 
-impl ggez::event::EventHandler for Game {
+impl event::EventHandler for Game {
     fn update(&mut self, _ctx: &mut Context) -> GameResult {
         Ok(())
     }
@@ -25,9 +22,9 @@ impl ggez::event::EventHandler for Game {
 
 pub fn main() -> GameResult {
 
-    let mut window_mode: WindowMode = Default::default();
-        window_mode.width = WIDTH;
-        window_mode.height = HEIGHT;
+    let window_mode = WindowMode::default()
+        .dimensions(1920.0, 1080.0)
+        .resizable(true);
     let (context, event_loop) = &mut ContextBuilder::new("kiwigrape-matchmaking", "Lucas")
         .window_mode(window_mode)
         .build()?;
