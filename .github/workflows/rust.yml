@@ -29,5 +29,5 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with: 
-          name: kiwigrape-matchmaking
+          name: batman-hash
           path: target/debug
