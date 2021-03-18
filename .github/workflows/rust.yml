@@ -16,13 +16,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: icepuma/rust-action@master
-      with:
-        args: cd src && cargo fmt -- --check && cargo clippy -- -Dwarnings && cargo test
     - uses: actions-rs/toolchain@v1
       with:
           profile: minimal
           toolchain: stable
+          components: rustfmy, clippy
     - uses: Swatinem/rust-cache@v1
     - name: Build
       run: cargo build --verbose
