@@ -25,7 +25,7 @@ pub fn main() -> GameResult {
     let window_mode = WindowMode::default()
         .dimensions(1920.0, 1080.0)
         .resizable(true);
-    let (context, event_loop) = &mut ContextBuilder::new("kiwigrape-matchmaking", "Lucas")
+    let (context, event_loop) = &mut ContextBuilder::new("batman-hash", "Lucas")
         .window_mode(window_mode)
         .build()?;
     
