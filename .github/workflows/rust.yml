@@ -12,10 +12,13 @@ env:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+    - uses: icepuma/rust-action@master
+      with:
+        args: cd src && cargo fmt -- --check && cargo clippy -- -Dwarnings && cargo test
     - uses: actions-rs/toolchain@v1
       with:
           profile: minimal
