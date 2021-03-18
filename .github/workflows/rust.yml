@@ -20,7 +20,7 @@ jobs:
       with:
           profile: minimal
           toolchain: stable
-          components: rustfmy, clippy
+          components: rustfmt, clippy
     - uses: Swatinem/rust-cache@v1
     - name: Build
       run: cargo build --verbose
