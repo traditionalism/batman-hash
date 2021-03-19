@@ -1,4 +1,4 @@
-name: RustBuild
+name: Rust
 
 on:
   push:
@@ -11,18 +11,16 @@ env:
 
 jobs:
   build:
-
     runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
     - uses: actions-rs/toolchain@v1
       with:
-          profile: minimal
           toolchain: stable
           components: rustfmt, clippy
     - uses: Swatinem/rust-cache@v1
     - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+      run: cargo build --release
+    - name: Run Tests
+      run: cargo test --release
