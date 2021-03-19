@@ -1,4 +1,4 @@
-name: RustBuild
+name: Rust
 
 on:
   push:
@@ -10,19 +10,26 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
-
-    runs-on: windows-latest
+  check:
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+    - uses: actions/checkout@v2
     - uses: actions-rs/toolchain@v1
       with:
-          profile: minimal
-          toolchain: stable
-          components: rustfmt, clippy
-    - uses: Swatinem/rust-cache@v1
+        toolchain: stable
+        components: clippy, rustfmt
+    - name: Check Formatting
+      run: cargo fmt -- --check
+    - name: Check Clippy
+      run: cargo clippy -- -D clippy::all
     - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+      run: cargo build --release
