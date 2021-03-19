@@ -26,8 +26,6 @@ impl event::EventHandler for Game {
 pub fn main() -> GameResult {
     let w_dim = nalgebra::Vector2::new(960.0, 640.0);
 
-
-
     let (context, event_loop) = &mut ContextBuilder::new("batman-hash", "Lucas")
         .window_setup(ggez::conf::WindowSetup::default().title("batman-hash"))
         .window_mode(WindowMode::default().dimensions(w_dim.x, w_dim.y).max_dimensions(w_dim.x, w_dim.y).min_dimensions(w_dim.x, w_dim.y),)
