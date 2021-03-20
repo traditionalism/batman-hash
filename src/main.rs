@@ -130,7 +130,7 @@ pub fn main() -> GameResult {
     #[cfg(not(debug_assertions))]
     {
         info!("Use resource archive");
-        cb = cb.add_zipfile_bytes(include_bytes!("../resources/zip").to_vec());
+        cb = cb.add_zipfile_bytes(include_bytes!("../resources.zip").to_vec());
     }
 
     let (ctx, event_loop) = &mut cb.build().unwrap();
