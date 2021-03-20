@@ -13,7 +13,6 @@ use std::time::Instant;
 #[derive(Copy, Clone, PartialEq, Debug, Default)]
 struct MouseState {
   pos: (i32, i32),
-  /// mouse buttons: (left, right, middle)
   pressed: (bool, bool, bool),
   wheel: f32,
   wheel_h: f32,
