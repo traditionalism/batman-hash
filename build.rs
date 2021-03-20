@@ -1,3 +1,4 @@
+#![allow(deprecated)]
 use zip;
 
 use std::io::prelude::*;
