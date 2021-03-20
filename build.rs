@@ -1,4 +1,7 @@
 #![allow(deprecated)]
+#![allow(unused_must_use)]
+#![cfg(windows)]
+extern crate winres;
 use zip;
 
 use std::io::prelude::*;
@@ -16,6 +19,12 @@ const SRC: &str = "resources";
 const DST: &str = "resources.zip";
 
 fn main() {
+    if std::path::Path::new("resources/128x128.ico").exists() {
+        let mut res = winres::WindowsResource::new();
+        res.set_icon("resources/128x128.ico");
+        res.compile();
+    }
+
     match make_zip(SRC, DST, METHOD_STORED.unwrap()) {
         Ok(_) => println!("build-resources={}={}", SRC, DST),
         Err(e) => panic!("build-resources=error={:?}", e),
