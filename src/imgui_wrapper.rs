@@ -37,7 +37,7 @@ impl ImGuiWrapper {
                 if version.major >= 3 {
                     Shaders::GlSlEs300
                 } else {
-                    Shaders::GlSlEs100 
+                    Shaders::GlSlEs100
                 }
             } else if version.major >= 4 {
                 Shaders::GlSl400
@@ -125,7 +125,7 @@ impl ImGuiWrapper {
 
     fn update_mouse(&mut self) {
         self.imgui.io_mut().mouse_pos = [self.mouse_state.pos.0 as f32, self.mouse_state.pos.1 as f32];
-    
+
         self.imgui.io_mut().mouse_down = [
           self.mouse_state.pressed.0,
           self.mouse_state.pressed.1,
@@ -133,10 +133,10 @@ impl ImGuiWrapper {
           false,
           false,
         ];
-    
+
         self.imgui.io_mut().mouse_wheel = self.mouse_state.wheel;
         self.mouse_state.wheel = 0.0;
-    
+
         self.imgui.io_mut().mouse_wheel_h = self.mouse_state.wheel_h;
         self.mouse_state.wheel_h = 0.0;
     }
