@@ -1,12 +1,18 @@
 // Thanks! (https://stackoverflow.com/questions/29763647/how-to-make-a-program-that-does-not-display-the-console-window)
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 use crate::imgui_wrapper::ImGuiWrapper;
+use crate::utils::{fix_path};
 use ggez::conf::{WindowMode};
 use ggez::{GameResult, Context};
 use ggez::event::{self, EventHandler, KeyCode, KeyMods, MouseButton};
 use ggez::graphics;
 
+use std::env;
+use log::{info};
+
+mod utils;
 mod imgui_wrapper;
+
 
 struct GameState {
     pos_x: f32,
@@ -95,16 +101,43 @@ impl EventHandler for GameState {
 
 
 pub fn main() -> GameResult {
+    #[cfg(debug_assertions)]
+    {
+        use log::LevelFilter;
+
+        env_logger::Builder::new()
+            .filter(None, LevelFilter::Info)
+            .filter(Some("gfx_device_gl"), LevelFilter::Error)
+            .init();
+    }
+
     let w_dim = nalgebra::Vector2::new(960.0, 640.0);
 
-    let cb = ggez::ContextBuilder::new("batman-hash", "Lucas")
+    let mut current_dir = env::current_dir().unwrap();
+    current_dir.push("resources");
+
+    let mut cb = ggez::ContextBuilder::new("batman-hash", "Lucas")
         .window_setup(ggez::conf::WindowSetup::default().title("batman-hash"))
         .window_mode(WindowMode::default().dimensions(w_dim.x, w_dim.y).max_dimensions(w_dim.x, w_dim.y).min_dimensions(w_dim.x, w_dim.y));
 
-    let (ref mut ctx, event_loop) = &mut cb.build()?;
+
+    #[cfg(debug_assertions)]
+    {
+        info!("Use resource in {:?}", current_dir);
+        cb = cb.add_resource_path(current_dir);
+    }
+
+    #[cfg(not(debug_assertions))]
+    {
+        info!("Use resource archive");
+        cb = cb.add_zipfile_bytes(include_bytes!("../resources/zip").to_vec());
+    }
+
+    let (ctx, event_loop) = &mut cb.build().unwrap();
+
+    graphics::set_window_icon(ctx, Some(fix_path(ctx, "128x128.ico"))).unwrap();
 
     let hidpi_factor = event_loop.get_primary_monitor().get_hidpi_factor() as f32;
-    println!("main hidpi_factor = {}", hidpi_factor);
 
     let state = &mut GameState::new(ctx, hidpi_factor)?;
 
