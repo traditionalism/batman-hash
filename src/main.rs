@@ -8,8 +8,6 @@ use ggez::graphics;
 
 mod imgui_wrapper;
 
-extern crate nalgebra as na;
-
 struct GameState {
     pos_x: f32,
     imgui_wrapper: ImGuiWrapper,
