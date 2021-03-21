@@ -118,7 +118,11 @@ pub fn main() -> GameResult {
 
     let mut cb = ggez::ContextBuilder::new("batman-hash", "Lucas")
         .window_setup(ggez::conf::WindowSetup::default().title("batman-hash"))
-        .window_mode(WindowMode::default().dimensions(w_dim.x, w_dim.y).max_dimensions(w_dim.x, w_dim.y).min_dimensions(w_dim.x, w_dim.y));
+        .window_mode(
+            WindowMode::default() 
+                .dimensions(w_dim.x, w_dim.y)
+                .max_dimensions(w_dim.x, w_dim.y)
+                .min_dimensions(w_dim.x, w_dim.y));
 
 
     #[cfg(debug_assertions)]
