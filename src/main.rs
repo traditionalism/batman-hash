@@ -14,6 +14,7 @@ use log::{info};
 
 mod utils;
 mod imgui_wrapper;
+mod print;
 
 struct GameState {
     pos_x: f32,
@@ -123,6 +124,7 @@ pub fn main() -> GameResult {
         .multiple(true)
         .help("verbosity level"))
     .get_matches();
+    print::logo();
 
     let mut current_dir = env::current_dir().unwrap();
     current_dir.push("resources");
