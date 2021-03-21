@@ -4,6 +4,19 @@ version = "0.1.0"
 authors = ["Lucas <genevasterm@protonmail.ch>"]
 edition = "2018"
 
+[profile.dev]
+# suggested by ggez to improve dev performance
+# "optimize for speed" levels:
+#opt-level = 1
+#opt-level = 2
+#opt-level = 3
+
+[profile.release]
+# this should shrink the built binary down quite a bit
+#opt-level = 1
+lto = true
+panic = 'abort'
+
 [dependencies]
 ggez = "0.5.1"
 nalgebra = "0.25.3"
