@@ -105,7 +105,7 @@ impl EventHandler for GameState {
 pub fn main() -> GameResult {
     let sl = Soloud::default().unwrap();
     let mut wav = audio::Wav::default();
-    wav.load_mem_weak(include_bytes!("amogus.mp3")).unwrap();
+    wav.load_mem_weak(include_bytes!("../resources/amogus.mp3")).unwrap();
     sl.play(&wav);
 
     #[cfg(debug_assertions)]
