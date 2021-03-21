@@ -1,6 +1,8 @@
 // Thanks! (https://stackoverflow.com/questions/29763647/how-to-make-a-program-that-does-not-display-the-console-window)
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 use crate::imgui_wrapper::ImGuiWrapper;
+use clap;
+use clap::{Arg, App};
 use crate::utils::{fix_path};
 use ggez::conf::{WindowMode};
 use ggez::{GameResult, Context};
@@ -12,7 +14,6 @@ use log::{info};
 
 mod utils;
 mod imgui_wrapper;
-
 
 struct GameState {
     pos_x: f32,
@@ -112,6 +113,16 @@ pub fn main() -> GameResult {
     }
 
     let w_dim = nalgebra::Vector2::new(960.0, 640.0);
+
+    let _matches = App::new("batman-hash")
+    .version("0.16.0-alpha")
+    .author("Lucas")
+    .about("A simple game built within the GGEZ RS library. It works!")
+    .arg(Arg::with_name("verbose")
+        .short("v")
+        .multiple(true)
+        .help("verbosity level"))
+    .get_matches();
 
     let mut current_dir = env::current_dir().unwrap();
     current_dir.push("resources");
