@@ -2,6 +2,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 use crate::imgui_wrapper::ImGuiWrapper;
 use clap;
+use soloud::*;
 use clap::{Arg, App};
 use crate::utils::{fix_path};
 use ggez::conf::{WindowMode};
@@ -101,8 +102,12 @@ impl EventHandler for GameState {
     }
 }
 
-
 pub fn main() -> GameResult {
+    let sl = Soloud::default().unwrap();
+    let mut wav = audio::Wav::default();
+    wav.load_mem_weak(include_bytes!("amogus.mp3")).unwrap();
+    sl.play(&wav);
+
     #[cfg(debug_assertions)]
     {
         use log::LevelFilter;

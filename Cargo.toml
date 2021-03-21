@@ -23,6 +23,7 @@ nalgebra = "0.25.3"
 log = "0.4.14"
 env_logger = "0.8.3"
 clap = "2.33.3"
+soloud = "0.3.4"
 
 gfx_core = "0.9.2"
 gfx_device_gl = "0.16.2"
