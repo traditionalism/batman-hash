@@ -11,3 +11,6 @@ Sorry! I'm lazy and have none.
 
 ### License
 * [WTFPL](https://choosealicense.com/licenses/wtfpl/)
+
+### Closing Notes
+**Made with 💝 by traditionalism**
