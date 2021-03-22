@@ -1,5 +1,6 @@
 // Thanks! (https://stackoverflow.com/questions/29763647/how-to-make-a-program-that-does-not-display-the-console-window)
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+#![allow(unused_imports)]
 use crate::imgui_wrapper::ImGuiWrapper;
 use clap;
 use soloud::*;
@@ -9,7 +10,7 @@ use ggez::conf::{WindowMode};
 use ggez::{GameResult, Context};
 use ggez::event::{self, EventHandler, KeyCode, KeyMods, MouseButton};
 use ggez::graphics;
-
+use mint::*;
 use std::env;
 use log::{info};
 
@@ -46,6 +47,16 @@ impl EventHandler for GameState {
         {
             self.imgui_wrapper.render(ctx, self.hidpi_factor);
         }
+
+        let circle = graphics::Mesh::new_circle(
+            ctx,
+            graphics::DrawMode::fill(),
+            mint::Point2{x: self.pos_x, y: 330.0},
+            100.0,
+            1.0,
+            graphics::WHITE)?;
+        graphics::draw(ctx, &circle, graphics::DrawParam::default())?;
+
         graphics::present(ctx)?;
         Ok(())
     }
