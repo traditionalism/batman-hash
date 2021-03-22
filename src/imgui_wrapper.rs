@@ -8,11 +8,14 @@ use gfx_device_gl;
 use imgui::*;
 use imgui_gfx_renderer::*;
 
+const HEIGHT: f32 = 100.0;
+const Y_OFFSET: f32 = 120.0;
+
 use std::time::Instant;
 
 #[derive(Copy, Clone, PartialEq, Debug, Default)]
 struct MouseState {
-  pos: (i32, i32),
+  pos: (f32, f32),
   pressed: (bool, bool, bool),
   wheel: f32,
   wheel_h: f32,
@@ -101,10 +104,16 @@ impl ImGuiWrapper {
 
         {
             Window::new(im_str!("Hello! From the renderer pipeline."))
-              .size([300.0, 600.0], imgui::Condition::FirstUseEver)
-              .position([50.0, 50.0], imgui::Condition::FirstUseEver)
+              .size([300.0, HEIGHT], imgui::Condition::FirstUseEver)
+              .position([100.0, Y_OFFSET], imgui::Condition::FirstUseEver)
               .build(&ui, || {
                 ui.text(im_str!("Hello! From inside the renderer pipeline."));
+                ui.separator();
+                let mouse_pos = ui.io().mouse_pos;
+                ui.text(format!(
+                    "Mouse Position: ({:.1},{:.1})",
+                    mouse_pos[0], mouse_pos[1]
+                ));
               });
             ui.show_demo_window(&mut show);
         }
@@ -141,7 +150,7 @@ impl ImGuiWrapper {
     }
 
     pub fn update_mouse_pos(&mut self, x: f32, y: f32) {
-        self.mouse_state.pos = (x as i32, y as i32);
+        self.mouse_state.pos = (x as f32, y as f32);
     }
 
     pub fn update_mouse_down(&mut self, button: MouseButton) {
