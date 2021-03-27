@@ -1,5 +1,5 @@
 # batman-hash
-Nothing much, a quick test game while I'm still getting into rs :/
+Nothing much to see, my way of testing the waters using this library :/
 
 ### Screenshots
 Sorry! I'm lazy and have none.
