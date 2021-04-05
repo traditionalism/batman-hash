@@ -1,6 +1,4 @@
-// Thanks! (https://stackoverflow.com/questions/29763647/how-to-make-a-program-that-does-not-display-the-console-window)
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-#![allow(unused_imports)]
 use crate::imgui_wrapper::ImGuiWrapper;
 use clap;
 use soloud::*;
@@ -139,8 +137,8 @@ pub fn main() -> GameResult {
         .short("v")
         .multiple(true)
         .help("verbosity level"))
-    .get_matches();
-    print::logo();
+        .get_matches();
+        print::logo();
 
     let mut current_dir = env::current_dir().unwrap();
     current_dir.push("resources");
