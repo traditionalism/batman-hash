@@ -8,7 +8,6 @@ use ggez::conf::{WindowMode};
 use ggez::{GameResult, Context};
 use ggez::event::{self, EventHandler, KeyCode, KeyMods, MouseButton};
 use ggez::graphics;
-use mint::*;
 use std::env;
 use log::{info};
 
